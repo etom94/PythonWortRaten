@@ -1,28 +1,27 @@
+
+### View:
+
 import tkinter as tk
 
-class WordGuess(tk.Frame):
-    def __init__(self, master, words):
+class WordGuessView(tk.Frame):
+    def __init__(self, master, controller):
         super().__init__(master)
-        self.words = words
-        self.create_buttons()
+        self.controller = controller
+        self.word_vars = []
         
-    def create_buttons(self):
-        for word in self.words:
-            button = tk.Button(self, text=word, command=lambda w= word: self.button_clicked(w))
-            button.pack()
-            
-    def button_clicked(self,word):
-        print(f"Button '{word}' clicked!")
+        self.upper_frame = tk.Frame(self)
+        self.lower_frame = tk.Frame(self)
+        
+        self.upper_frame.pack(fill="both", expand=True)
+        self.lower_frame.pack(fill="both", expand=True)
+        
+        self.create_buttons()
 
-if __name__ == "__main__":
-    words = [
-        "apple", "banana", "car", "dog", "elephant",
-        "flower", "guitar", "house", "ice cream", "jacket",
-        "kite", "lion", "mountain", "notebook", "ocean",
-        "piano", "queen", "rainbow", "sun", "tree"
-    ]
-    
-    root = tk.Tk()
-    app = WordGuess(root,words)
-    app.pack()
-    root.mainloop()
+    def create_buttons(self):
+        for word in self.controller.get_words():
+            word_var = tk.StringVar(value=word)  # Direkt den Wert setzen
+            self.word_vars.append(word_var)
+            button = tk.Button(self.lower_frame, textvariable=word_var)
+            button.configure(command=lambda w=word: self.controller.button_clicked(w))
+            button.pack(padx=1,pady=1, fill="both", expand=True)
+            
