@@ -10,14 +10,34 @@ class WordGuessView(tk.Frame):
         self.word_vars = []
         self.letter_labels = []
 
+        self.header_frame = tk.PanedWindow(self)
         self.upper_frame = tk.PanedWindow(self, height=200)
         self.lower_frame = tk.PanedWindow(self, orient=tk.VERTICAL)
+        self.footer_frame = tk.PanedWindow(self)
 
-        self.upper_frame.grid(row=0, column=0)
-        self.lower_frame.grid(row=1, column=0)
+        self.header_frame.grid(row=0, column=0)
+        self.upper_frame.grid(row=1, column=0)
+        self.lower_frame.grid(row=2, column=0)
+        self.footer_frame.grid(row=4, column=0)
 
+        self.create_header()
         self.create_letter_labels()
         self.create_buttons()
+        
+    def create_footer(self, initial_tries):
+        self.tries_left = (initial_tries+5)
+        point_label = tk.Label(self.footer_frame, text=f"Tries: {self.tries_left}")
+        point_label.grid(row=0, column=0, sticky='nsew')
+        self.point_label = point_label  # Store the label as an instance variable
+
+        
+    def update_tries(self):
+        self.tries_left -= 1
+        self.point_label.config(text=f"Tries: {self.tries_left}")
+        
+    def create_header(self):
+        titel_label = tk.Label(self.header_frame, text="Guess the right Word", font=('Helvetica', 12))
+        titel_label.grid(row=0, column=0, sticky='nsew')
 
     def create_letter_labels(self):
         random_word = self.controller.get_random_word()
@@ -41,5 +61,6 @@ class WordGuessView(tk.Frame):
 
     def deactivate_button(self, btn, button_widget):
         button_widget.config(state=tk.DISABLED, bg="black")
+        
 
           
