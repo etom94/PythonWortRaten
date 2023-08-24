@@ -16,9 +16,9 @@ class WordGuessView(tk.Frame):
         self.footer_frame = tk.PanedWindow(self)
 
         self.header_frame.grid(row=0, column=0)
-        self.upper_frame.grid(row=1, column=0)
-        self.lower_frame.grid(row=2, column=0)
-        self.footer_frame.grid(row=4, column=0)
+        self.upper_frame.grid(row=1, column=0, pady=10)
+        self.lower_frame.grid(row=2, column=0, pady=5)
+        self.footer_frame.grid(row=4, column=0, pady=20)
 
         self.create_header()
         self.create_letter_labels()
@@ -52,7 +52,7 @@ class WordGuessView(tk.Frame):
             self.word_vars.append(word_var)
             button = tk.Button(self.lower_frame, textvariable=word_var)
             button.configure(command=lambda w=word, btn=button: self.controller.button_clicked(w, btn))
-            button.grid(row=i // 5, column=i % 5, sticky='nsew')
+            button.grid(row=i // 5, column=i % 5, sticky='nsew', padx=2, pady=2)
 
     def update_word_display(self, revealed_letters):
         for i, revealed in enumerate(revealed_letters):

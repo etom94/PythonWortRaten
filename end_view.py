@@ -9,7 +9,7 @@ class EndView(tk.Frame):
         
         self.winning_word = winning_word
         
-        label = tk.Label(self, text=f"{text} {winning_word}", font=("Helvetica", 16))
+        label = tk.Label(self, text=f"{text} {winning_word}", font=("Helvetica", 12))
         label.pack(padx=20, pady=20)
 
         # Fügen Sie diese Zeile hinzu, um die Ansicht im Hauptfenster anzuzeigen

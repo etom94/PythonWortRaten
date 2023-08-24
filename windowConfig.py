@@ -2,8 +2,8 @@ def configureWindow(root):
     screenWidth = root.winfo_screenwidth()
     screenHeight = root.winfo_screenheight()
 
-    windowWidth = 400
-    windwoHeight = 400
+    windowWidth = 500
+    windwoHeight = 350
 
     xPosition = (screenWidth - windowWidth) // 2 
     yPosition = (screenHeight - windwoHeight) // 2
